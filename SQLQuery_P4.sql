@@ -107,29 +107,29 @@ VALUES
 
 
 
-INSERT INTO [Post] ([Description], Post_TimeStamp)
+INSERT INTO [Post]
 VALUES
-(1, 'I just finished reading a great book - highly recommend!'),
-(2, 'I tried a new restaurant today and it was amazing!'),
-(3, 'Anyone have any good recommendations for a new TV show to watch?'),
-(4, 'Just wanted to share some good news - I got a promotion at work!'),
-(5, 'I went on an amazing hike over the weekend and wanted to share some pictures!'),
-(6, 'Anyone interested in forming a book club?'),
-(7, 'Just got back from a trip to Hawaii - it was incredible!'),
-(8, 'I am thinking of starting a new hobby - any suggestions?'),
-(9, 'I just finished a big project at work and am feeling great!'),
-(10, 'Just wanted to share some cute pictures of my dog!'),
+(1, 1, 'I just finished reading a great book - highly recommend!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 00:00:00')),
+(2, 4, 'I tried a new restaurant today and it was amazing!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 01:00:00')),
+(3, 10, 'Anyone have any good recommendations for a new TV show to watch?', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 02:00:00')),
+(4, 11, 'Just wanted to share some good news - I got a promotion at work!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 03:00:00')),
+(5, 15, 'I went on an amazing hike over the weekend and wanted to share some pictures!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 04:00:00')),
+(6, 7, 'Anyone interested in forming a book club?', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 05:00:00')),
+(7, 8, 'Just got back from a trip to Hawaii - it was incredible!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 06:00:00')),
+(8, 10, 'I am thinking of starting a new hobby - any suggestions?', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 07:00:00')),
+(9, 19, 'I just finished a big project at work and am feeling great!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 08:00:00')),
+(10, 20, 'Just wanted to share some cute pictures of my dog!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 09:00:00')),
 
-(11, 'Selling a used car - great condition!'),
-(12, 'Selling a used chair - good condition?'),
-(13, 'Selling some gently used furniture - message me if interested!'),
-(14, 'Looking for a new bike - any recommendations?'),
-(15, 'Selling tickets to a concert - DM me for more info!'),
-(16, 'Anyone selling a used laptop?'),
-(17, 'Looking for a new apartment - any leads?'),
-(18, 'Selling a collection of vintage records - DM if interested!'),
-(19, 'Looking to buy a used camera - any suggestions?'),
-(20, 'Selling a gently used wedding dress - message me for details!');
+(11, 2, 'Selling a used car - great condition!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 10:00:00')),
+(12, 5, 'Selling a used chair - good condition?', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 11:00:00')),
+(13, 31, 'Selling some gently used furniture - message me if interested!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 12:00:00')),
+(14, 34, 'Looking for a new bike - any recommendations?', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 13:00:00')),
+(15, 36, 'Selling tickets to a concert - DM me for more info!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 14:00:00')),
+(16, 35, 'Anyone selling a used laptop?', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 15:00:00')),
+(17, 38, 'Looking for a new apartment - any leads?', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 16:00:00')),
+(18, 30, 'Selling a collection of vintage records - DM if interested!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 17:00:00')),
+(19, 32, 'Looking to buy a used camera - any suggestions?', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 18:00:00')),
+(20, 26, 'Selling a gently used wedding dress - message me for details!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 19:00:00'));
 
 
 INSERT INTO [GeneralPost]
@@ -161,40 +161,40 @@ VALUES
 
 INSERT INTO [PostLike]
 VALUES
-(1, 2),
-(2, 3),
-(1, 3),
-(3, 1),
-(2, 1),
-(3, 2),
-(1, 4),
-(2, 4),
-(3, 4),
-(1, 5);
+(DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 00:00:00'), 1, 2),
+(DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 12:00:00'), 2, 3),
+(DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 01:00:00'), 1, 3),
+(DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 02:00:00'), 3, 1),
+(DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 03:00:00'), 2, 1),
+(DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 04:00:00'), 3, 2),
+(DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 05:00:00'), 1, 4),
+(DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 06:00:00'), 2, 4),
+(DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 07:00:00'), 3, 4),
+(DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 08:00:00'), 1, 5);
 
 INSERT INTO [Comment]
 VALUES
-(1, 1, 1, 'Great book, I love it!'),
-(2, 2, 1, 'I want to read this book next!'),
-(3, 3, 2, 'The food was delicious, thanks for the recommendation!'),
-(4, 4, 2, 'I need to try this place soon!'),
-(5, 5, 3, 'I just finished watching Bridgerton and it was amazing!'),
-(6, 6, 3, 'Have you seen Schitts Creek yet? It is also great!'),
-(7, 7, 4, 'Congratulations on the promotion!'),
-(8, 8, 4, 'I hope I can get a promotion soon too!'),
-(9, 9, 5, 'I love hiking too! Where did you go?'),
-(10, 10, 5, 'Great pictures, thanks for sharing!');
+(1, 1, 1, 'Great book, I love it!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 01:00:00')),
+(2, 2, 1, 'I want to read this book next!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 01:00:00')),
+(3, 3, 2, 'The food was delicious, thanks for the recommendation!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 02:00:00')),
+(4, 4, 2, 'I need to try this place soon!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 03:00:00')),
+(5, 5, 3, 'I just finished watching Bridgerton and it was amazing!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 04:00:00')),
+(6, 6, 3, 'Have you seen Schitts Creek yet? It is also great!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 05:00:00')),
+(7, 7, 4, 'Congratulations on the promotion!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 06:00:00')),
+(8, 8, 4, 'I hope I can get a promotion soon too!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 07:00:00')),
+(9, 9, 5, 'I love hiking too! Where did you go?', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 08:00:00')),
+(10, 10, 5, 'Great pictures, thanks for sharing!', DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 09:00:00'));
 
 
 INSERT INTO [CommentLike]
 VALUES
-(2, 1),
-(3, 1),
-(4, 2),
-(5, 2),
-(6, 3),
-(7, 3),
-(8, 4),
-(9, 4),
-(10, 5),
-(1, 5);
+(DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 00:00:00'), 2, 1),
+(DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 01:00:00'), 3, 1),
+(DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 02:00:00'), 4, 2),
+(DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 03:00:00'), 5, 2),
+(DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 04:00:00'), 6, 3),
+(DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 05:00:00'), 7, 3),
+(DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 06:00:00'), 8, 4),
+(DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 07:00:00'), 9, 4),
+(DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 08:00:00'), 10, 5),
+(DATEADD(second, CAST(RAND() * 1000000 as int), '2012-04-15 09:00:00'), 1, 5);

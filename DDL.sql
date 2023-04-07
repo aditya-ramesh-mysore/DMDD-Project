@@ -12,15 +12,16 @@ CREATE TABLE [User]
     UserName nvarchar(25),
 	[Password] varchar(50),
 	UserType varchar(50),
-	CONSTRAINT User_PK PRIMARY KEY (UserID)
+	CONSTRAINT User_PK PRIMARY KEY (UserID),
+    CONSTRAINT UserType_Check CHECK (UserType IN ('Student', 'Professor', 'Employer', 'Group'))
 );
 
 CREATE TABLE [Group]
 (
     G_UserID int not null,
-    CreationDate date,
+    CreationDate datetime default GETDATE(),
     CONSTRAINT Group_PK PRIMARY KEY (G_UserID),
-    CONSTRAINT Group_FK FOREIGN KEY (G_UserID) REFERENCES [User](UserID),
+    CONSTRAINT Group_FK FOREIGN KEY (G_UserID) REFERENCES [User](UserID) ON DELETE CASCADE,
 );
 
 CREATE TABLE [Professor]
@@ -32,7 +33,7 @@ CREATE TABLE [Professor]
     Gender varchar(10),
     Check (Gender IN ('Male', 'Female', 'Other')),
     CONSTRAINT Professor_PK PRIMARY KEY (P_UserID),
-    CONSTRAINT Professor_FK FOREIGN KEY (P_UserID) REFERENCES [User](UserID),
+    CONSTRAINT Professor_FK FOREIGN KEY (P_UserID) REFERENCES [User](UserID) ON DELETE CASCADE,
 );
 
 CREATE TABLE [Student]
@@ -44,7 +45,7 @@ CREATE TABLE [Student]
     Gender varchar(10),
     Check (Gender IN ('Male', 'Female', 'Other')),
     CONSTRAINT Student_PK PRIMARY KEY (S_UserID),
-    CONSTRAINT Student_FK FOREIGN KEY (S_UserID) REFERENCES [User](UserID),
+    CONSTRAINT Student_FK FOREIGN KEY (S_UserID) REFERENCES [User](UserID) ON DELETE CASCADE,
 );
 
 CREATE TABLE [Employer]
@@ -52,16 +53,17 @@ CREATE TABLE [Employer]
     E_UserID int not null,
     [Location] varchar(50),
     CONSTRAINT Employer_PK PRIMARY KEY (E_UserID),
-    CONSTRAINT Employer_FK FOREIGN KEY (E_UserID) REFERENCES [User](UserID),
+    CONSTRAINT Employer_FK FOREIGN KEY (E_UserID) REFERENCES [User](UserID) ON DELETE CASCADE,
 );
 
 CREATE TABLE [Post]
 (
     PostID int not null,
+    UserID int not null,
     [Description] varchar(200),
-    Post_TimeStamp datetime NOT NULL,
+    Post_TimeStamp datetime default GETDATE(),
     CONSTRAINT Post_Pk PRIMARY KEY (PostID),
-    CONSTRAINT Post_Fk FOREIGN key (PostID) REFERENCES [User](UserID)
+    CONSTRAINT User_FK FOREIGN key (UserID) REFERENCES [User](UserID)
 );
 
 CREATE TABLE [GeneralPost]
@@ -86,7 +88,7 @@ CREATE TABLE [MarketPlacePost]
 
 CREATE TABLE [PostLike]
 (
-    Like_TimeStamp datetime NOT NULL,
+    Like_TimeStamp datetime default GETDATE(),
     UserID int NOT NULL,
     PostID int NOT NULL,
     CONSTRAINT PostLike_PK PRIMARY KEY (Like_TimeStamp, UserID),
@@ -102,7 +104,7 @@ CREATE TABLE Comment
     UserID int NOT NULL,
     PostID int NOT NULL,
     Com_Description varchar(200),
-    Cmt_TimeStamp timestamp NOT NULL,
+    Cmt_TimeStamp datetime default GETDATE(),
     CONSTRAINT Comment_PK PRIMARY KEY (CommentID),
     CONSTRAINT Comment_FK_UserID FOREIGN KEY (UserID) REFERENCES [User](UserID),
     CONSTRAINT Comment_FK_PostID FOREIGN KEY (PostID) REFERENCES [Post](PostID)
@@ -110,7 +112,7 @@ CREATE TABLE Comment
 
 CREATE TABLE CommentLike
 (
-    Cmt_like_TimeStamp timestamp NOT NULL,
+    Cmt_like_TimeStamp datetime default GETDATE(),
     UserID int NOT NULL,
     CommentID int NOT NULL,
     CONSTRAINT CommentLike_PK PRIMARY KEY (Cmt_like_TimeStamp, UserID),
