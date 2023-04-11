@@ -1,0 +1,6 @@
+USE P4;
+GO
+
+CREATE NONCLUSTERED INDEX NonClustered_Post
+ON [Post] ([Description])
+WITH (ONLINE = ON , FILLFACTOR=90)
