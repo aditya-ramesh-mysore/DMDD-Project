@@ -4,3 +4,15 @@ GO
 CREATE NONCLUSTERED INDEX NonClustered_Post
 ON [Post] ([Description])
 WITH (ONLINE = ON , FILLFACTOR=90)
+
+CREATE NONCLUSTERED INDEX NonClustered_Student
+ON [Student] ([Major], [DateOfBirth])
+WITH (ONLINE = ON , FILLFACTOR=90)
+
+CREATE NONCLUSTERED INDEX NonClustered_Comment
+ON [Comment] ([UserID], [PostID])
+WITH (ONLINE = ON , FILLFACTOR=90)
+
+CREATE NONCLUSTERED INDEX NonClustered_Like
+ON [PostLike] ([UserID], [PostID])
+WITH (ONLINE = ON , FILLFACTOR=90)
