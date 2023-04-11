@@ -87,28 +87,26 @@ END
 EXEC GetMostLikedAndCommentedPosts;
 
 
+--Stored procedure that takes in the required values and updates the existing row in the Professor table for the specified P_UserID
+GO
+CREATE PROCEDURE UpdateProfessorData
+    @P_UserID INT,
+    @ResearchInterest VARCHAR(50),
+    @DateOfBirth DATE,
+    @Gender VARCHAR(10)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    UPDATE Professor
+    SET ReasarchInterest = @ResearchInterest,
+        DateOfBirth = @DateOfBirth,
+        Gender = @Gender
+    WHERE P_UserID = @P_UserID;
+END
 
--- stored procedure that will return the top 5 active groups in a given time period
--- go
--- CREATE PROCEDURE GetMostActiveGroups
---     @start_date DATETIME,
---     @end_date DATETIME
--- AS
--- BEGIN
---     SET NOCOUNT ON;
-
---     SELECT TOP 5 [Group].G_UserID, COUNT(*) AS NumPosts
---     FROM [Group]
---     INNER JOIN [Post] ON [Group].G_UserID = [Post].UserID
---     WHERE [Post].Post_TimeStamp BETWEEN @start_date AND @end_date
---     GROUP BY [Group].G_UserID
---     ORDER BY NumPosts DESC;
-
--- END
-
-
--- EXEC GetMostActiveGroups '2012-04-14', '2012-04-16';
--- DROP PROCEDURE IF EXISTS GetMostActiveGroups;
+GO
+EXEC UpdateProfessorData @P_UserID = 11, @ResearchInterest = 'Artificial Intelligence', @DateOfBirth = '1990-01-01', @Gender = 'Male';
 
 
 DROP PROCEDURE IF EXISTS CountUserTypes;
@@ -116,5 +114,6 @@ DROP PROCEDURE IF EXISTS GetTop5StudentPosts;
 DROP PROCEDURE IF EXISTS GetTop5EmployerPosts;
 DROP PROCEDURE IF EXISTS get_top_5_users_with_most_posts;
 DROP PROCEDURE IF EXISTS GetMostLikedAndCommentedPosts;
+DROP PROCEDURE IF EXISTS UpdateProfessorData;
 
 
