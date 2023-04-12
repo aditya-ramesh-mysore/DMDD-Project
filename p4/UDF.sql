@@ -1,6 +1,7 @@
 USE P4
 GO
 
+-- User defined funciton to calculate age based on a given date
 CREATE FUNCTION Calculate_Age(@DateOfBirth DATE)
 RETURNS INT
 AS
@@ -17,6 +18,7 @@ GO
 SELECT * FROM Student;
 GO
 
+-- User defined function to calculate the number of likes on a post
 CREATE FUNCTION Calculate_Number_Of_Likes(@PostID INT)
 RETURNS INT
 AS
@@ -38,6 +40,7 @@ GO
 SELECT * FROM dbo.Post;
 GO
 
+-- User defined function to return the number of comments on a single post
 
 CREATE FUNCTION Calculate_Number_Of_Comments(@PostID INT)
 RETURNS INT
