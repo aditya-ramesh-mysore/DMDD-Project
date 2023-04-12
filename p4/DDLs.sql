@@ -1,16 +1,18 @@
 USE master;
 
+
 CREATE DATABASE P4;
+
 GO
 use P4
-go
+Go
 
 CREATE TABLE [User]
 (
 	UserID int not null,
 	[Name] nvarchar(25),
     UserName nvarchar(25),
-	[Password] varchar(50),
+	[Password] VARBINARY(Max),
 	[UserType] varchar(50),
 	CONSTRAINT User_PK PRIMARY KEY (UserID),
     CONSTRAINT UserType_Check CHECK (UserType IN ('Student', 'Professor', 'Employer', 'Group'))
