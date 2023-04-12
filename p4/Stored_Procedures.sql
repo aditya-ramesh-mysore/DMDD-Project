@@ -1,12 +1,118 @@
 USE master;
 
-
 GO
 use P4
 go
 
 
+-- Stored procedures with input and output parameters
+
+-- GetStudentDetails - This stored procedure takes in an input parameter StudentID 
+-- and returns the output parameters StudentName and CourseName.
+GO
+CREATE PROCEDURE GetStudentDetails
+    @StudentID INT,
+    @StudentName VARCHAR(50) OUTPUT,
+    @CourseName VARCHAR(50) OUTPUT
+AS
+BEGIN
+    SELECT @StudentName = [Name], @CourseName = Major
+    FROM [User]
+    JOIN [Student] ON [User].UserID = [Student].S_UserID
+    WHERE [Student].S_UserID = @StudentID
+END
+
+DECLARE @StudentName VARCHAR(50), @CourseName VARCHAR(50)
+EXEC GetStudentDetails @StudentID = 25, @StudentName = @StudentName OUTPUT, @CourseName = @CourseName OUTPUT
+SELECT @StudentName, @CourseName
+
+
+
+-- GetCourseStudents - This stored procedure takes in an input parameter CourseID 
+-- and returns a list of student names who are enrolled in that course.
+
+GO
+CREATE PROCEDURE GetCourseStudents
+    @Major VARCHAR(50),
+    @StudentList VARCHAR(MAX) OUTPUT
+AS
+BEGIN
+    SET @StudentList = ''
+    SELECT @StudentList = @StudentList + [Name] + ','
+    FROM [User] U
+    JOIN [Student] S ON U.UserID = S.S_UserID
+    WHERE S.Major = @Major
+    SET @StudentList = LEFT(@StudentList, LEN(@StudentList) - 1)
+END
+
+
+DECLARE @StudentList VARCHAR(MAX)
+EXEC GetCourseStudents @Major = 'Computer Vision', @StudentList = @StudentList OUTPUT
+SELECT @StudentList
+
+
+-- stored procedure that retrieves the number of likes and comments for a given post
+-- with PostID as input.
+GO
+CREATE PROCEDURE GetPostStats
+    @PostID INT,
+    @NumLikes INT OUTPUT,
+    @NumComments INT OUTPUT
+AS
+BEGIN
+    SELECT @NumLikes = COUNT(*)
+    FROM [PostLike]
+    WHERE PostID = @PostID
+    
+    SELECT @NumComments = COUNT(*)
+    FROM Comment
+    WHERE PostID = @PostID
+END
+
+DECLARE @NumLikes INT, @NumComments INT
+EXEC GetPostStats @PostID = 4, @NumLikes = @NumLikes OUTPUT, @NumComments = @NumComments OUTPUT
+SELECT @NumLikes, @NumComments
+
+
+
+--Stored procedure that takes in the required values and updates the existing row in the Professor table for the specified P_UserID
+GO
+CREATE PROCEDURE UpdateProfessorData
+    @P_UserID INT,
+    @ResearchInterest VARCHAR(50),
+    @DateOfBirth DATE,
+    @Gender VARCHAR(10)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    UPDATE Professor
+    SET ReasarchInterest = @ResearchInterest,
+        DateOfBirth = @DateOfBirth,
+        Gender = @Gender
+    WHERE P_UserID = @P_UserID;
+END
+
+GO
+EXEC UpdateProfessorData @P_UserID = 11, @ResearchInterest = 'Artificial Intelligence', @DateOfBirth = '1990-01-01', @Gender = 'Male';
+
+
+
+DROP PROCEDURE IF EXISTS GetStudentDetails;
+DROP PROCEDURE IF EXISTS GetCourseStudents;
+DROP PROCEDURE IF EXISTS GetPostStats;
+DROP PROCEDURE IF EXISTS UpdateProfessorData;
+
+
+
+
+
+
+
+
+-- general stored procedures
 -- stored procedure to count all types of users in the User table.
+GO
 CREATE PROCEDURE CountUserTypes
 AS
 BEGIN
@@ -87,26 +193,6 @@ END
 EXEC GetMostLikedAndCommentedPosts;
 
 
---Stored procedure that takes in the required values and updates the existing row in the Professor table for the specified P_UserID
-GO
-CREATE PROCEDURE UpdateProfessorData
-    @P_UserID INT,
-    @ResearchInterest VARCHAR(50),
-    @DateOfBirth DATE,
-    @Gender VARCHAR(10)
-AS
-BEGIN
-    SET NOCOUNT ON;
-    
-    UPDATE Professor
-    SET ReasarchInterest = @ResearchInterest,
-        DateOfBirth = @DateOfBirth,
-        Gender = @Gender
-    WHERE P_UserID = @P_UserID;
-END
-
-GO
-EXEC UpdateProfessorData @P_UserID = 11, @ResearchInterest = 'Artificial Intelligence', @DateOfBirth = '1990-01-01', @Gender = 'Male';
 
 
 DROP PROCEDURE IF EXISTS CountUserTypes;
@@ -114,6 +200,5 @@ DROP PROCEDURE IF EXISTS GetTop5StudentPosts;
 DROP PROCEDURE IF EXISTS GetTop5EmployerPosts;
 DROP PROCEDURE IF EXISTS get_top_5_users_with_most_posts;
 DROP PROCEDURE IF EXISTS GetMostLikedAndCommentedPosts;
-DROP PROCEDURE IF EXISTS UpdateProfessorData;
 
 
