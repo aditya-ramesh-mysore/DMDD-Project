@@ -489,3 +489,20 @@ GO
 
 SELECT * FROM dbo.Post;
 GO
+
+-- Created non clustered indexes for Post, Student, Comment and Like tables to ensure efficient query retrieval
+
+CREATE NONCLUSTERED INDEX NonClustered_Post
+ON [Post] ([Description])
+WITH (ONLINE = ON , FILLFACTOR=90)
+
+CREATE NONCLUSTERED INDEX NonClustered_Student
+ON [Student] ([Major], [DateOfBirth])
+WITH (ONLINE = ON , FILLFACTOR=90)
+
+CREATE NONCLUSTERED INDEX NonClustered_Comment
+ON [Comment] ([UserID], [PostID])
+WITH (ONLINE = ON , FILLFACTOR=90)
+
+CREATE NONCLUSTERED INDEX NonClustered_Like
+ON [PostLike] ([UserID], [PostID])
